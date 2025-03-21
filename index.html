@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>歌詞表示と音楽コントロール</title>
+</head>
+<body style="margin: 0; display: flex; height: 100vh;">
+
+  <!-- Sidebar -->
+  <div style="width: 60px; background-color: gray; padding: 5px; box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; height: 100%; display: flex; flex-direction: column; align-items: center;">
+    <button id="reset" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">最初から</button>
+    <hr style="width: 80%; border: 1px solid lightgray; margin: 10px 0;">
+    <button id="togglePlay" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">再生</button>
+    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
+      <button id="rewind" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒戻す</button>
+      <button id="forward" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒進む</button>
+    </div>
+  </div>
+
+  <!-- Lyrics Display -->
+  <div style="flex-grow: 1; margin-left: 60px; padding: 20px; font-family: Arial, sans-serif; font-size: 18px; line-height: 1.8; color: #333; overflow-y: scroll; height: 100%;">
+    <p>a</p>
+    <p>b</p>
+    <p>c</p>
+    <p>d</p>
+    <p>e</p>
+    <p>f</p>
+    <p>g</p>
+    <p>h</p>
+    <p>i</p>
+    <p>j</p>
+    <p>k</p>
+    <p>l</p>
+    <p>m</p>
+    <p>n</p>
+    <p>o</p>
+    <p>p</p>
+    <p>q</p>
+    <p>r</p>
+    <p>s</p>
+    <p>t</p>
+    <p>u</p>
+    <p>v</p>
+    <p>w</p>
+    <p>x</p>
+    <p>y</p>
+    <p>z</p>
+    <p>aa</p>
+    <p>bb</p>
+    <p>cc</p>
+    <p>dd</p>
+    <p>ee</p>
+    <p>ff</p>
+    <p>gg</p>
+    <p>hh</p>
+    <p>ii</p>
+    <p>jj</p>
+    <p>kk</p>
+    <p>ll</p>
+    <p>mm</p>
+    <p>nn</p>
+    <p>oo</p>
+    <p>pp</p>
+    <p>qq</p>
+    <p>rr</p>
+    <p>ss</p>
+    <p>tt</p>
+    <p>uu</p>
+    <p>vv</p>
+    <p>ww</p>
+  </div>
+
+  <audio id="audio" src="s.mp3"></audio>
+
+  <script>
+    const audio = document.getElementById('audio');
+    const togglePlayButton = document.getElementById('togglePlay');
+    const rewindButton = document.getElementById('rewind');
+    const forwardButton = document.getElementById('forward');
+    const resetButton = document.getElementById('reset');
+
+    togglePlayButton.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        togglePlayButton.textContent = '停止';
+      } else {
+        audio.pause();
+        togglePlayButton.textContent = '再生';
+      }
+    });
+
+    rewindButton.addEventListener('click', () => {
+      audio.currentTime = Math.max(0, audio.currentTime - 10); // 10秒巻き戻し
+    });
+
+    forwardButton.addEventListener('click', () => {
+      audio.currentTime = Math.min(audio.duration, audio.currentTime + 10); // 10秒進める
+    });
+
+    resetButton.addEventListener('click', () => {
+      audio.currentTime = 0; // 再生位置を最初に戻す
+    });
+  </script>
+
+</body>
+</html>
