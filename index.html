@@ -4,23 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>統合記念愛唱歌 NEXT STAGE|歌詞表示</title>
-</head>
-<body style="margin: 0; display: flex; height: 100vh;">
+  <style>
+    /* ローディングアニメーション用スタイル */
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      z-index: 9999;
+    }
 
-  <!-- Sidebar -->
-  <div id="sidebar" style="width: 60px; background-color: gray; padding: 5px; box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; height: 100%; display: flex; flex-direction: column; align-items: center;">
-    <button id="reset" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">最初から</button>
-    <hr style="width: 80%; border: 1px solid lightgray; margin: 10px 0;">
-    <button id="togglePlay" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">再生</button>
-    <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
-      <button id="rewind" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒戻す</button>
-      <button id="forward" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒進む</button>
-    </div>
-    <button id="toggleSidebar" style="width: 50px; height: 40px; margin: 20px 0; font-size: 12px; border: none; background-color: lightgray;">切り替え</button>
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #ccc;
+      border-top: 5px solid #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* メインコンテンツ非表示用 */
+    #main-content {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- ローディングアニメーション -->
+  <div id="loading">
+    <div class="spinner"></div>
   </div>
 
-  <!-- Lyrics Display -->
-  <div id="lyrics" style="flex-grow: 1; margin-left: 60px; padding: 20px; font-family: Arial, sans-serif; font-size: 18px; line-height: 1.8; color: #333; overflow-y: scroll; height: 100%;">
+  <!-- メインコンテンツ -->
+  <div id="main-content" style="margin: 0; display: flex; height: 100vh;">
+
+    <!-- Sidebar -->
+    <div id="sidebar" style="width: 60px; background-color: gray; padding: 5px; box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; height: 100%; display: flex; flex-direction: column; align-items: center;">
+      <button id="reset" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">最初から</button>
+      <hr style="width: 80%; border: 1px solid lightgray; margin: 10px 0;">
+      <button id="togglePlay" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">再生</button>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
+        <button id="rewind" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒戻す</button>
+        <button id="forward" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒進む</button>
+      </div>
+      <button id="toggleSidebar" style="width: 50px; height: 40px; margin: 20px 0; font-size: 12px; border: none; background-color: lightgray;">切り替え</button>
+    </div>
+    <!-- Lyrics Display -->
+    <div id="lyrics" style="flex-grow: 1; margin-left: 60px; padding: 20px; font-family: Arial, sans-serif; font-size: 18px; line-height: 1.8; color: #333; overflow-y: scroll; height: 100%;">
     <p>桜のつぼみが開くとき</p>
     <p>僕らの心は揺れ動く</p>
     <p>未来に抱える不安とともに</p>
@@ -39,11 +83,51 @@
     <p>夏の心地よい日差し</p>
     <p>2つの道が交わる先へ</p>
     <p>Let's go to the next stage</p>
+    <p>太陽の光照りつける</p>
+    <p>日差しの中で君は笑う</p>
+    <p>新しく増えた仲間と共に</p>
+    <p>学んで遊ぶ毎日</p>
+    <p>僕たちが駆け抜ける青春は</p>
+    <p>短い人生のごく一部</p>
+    <p>でもここで過ごした時間は</p>
+    <p>きっと未来の宝物</p>
+    <p>僕らの作る未来は</p>
+    <p>誰も予想できないだろう</p>
+    <p>秋の美しい山も冬の輝く雪も</p>
+    <p>二つの道が交わった先に</p>
+    <p>Wolcome to the next stage</p>
+    <p>La（奈良尾中・若松中校歌）</p>
+    <p>桜のつぼみが開くとき</p>
+    <p>僕らの別れがやってくる</p>
+    <p>残り少ないまた明日</p>
+    <p>伝えて歩く帰り道</p>
+    <p>僕らの創る未来は</p>
+    <p>誰も予想できないだろう</p>
+    <p>波のまぶしい海と光り輝く島よ</p>
+    <p>幾多の道が交わる先に</p>
+    <p>Let's go to the next stage</p>
+    <p>飛び込む広い世界の中で</p>
+    <p>僕らがまた巡り合うこと</p>
+    <p>あるかどうかはわからないけど</p>
+    <p>心のなかにちゃんと君がいる</p>
+    <p>また一人に戻っても</p>
+    <p>きっときっと大丈夫だから</p>
+    <p>僕も君も新しい場所</p>
+    <p>新しい世界を</p>
+    </div>
   </div>
 
   <audio id="audio" src="s.mp3"></audio>
 
   <script>
+    // ローディングアニメーション制御
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('main-content').style.display = 'flex';
+      }, 2000); // 2秒後にローディング終了
+    });
+
     const audio = document.getElementById('audio');
     const togglePlayButton = document.getElementById('togglePlay');
     const rewindButton = document.getElementById('rewind');
