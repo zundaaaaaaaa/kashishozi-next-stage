@@ -41,6 +41,28 @@
     #main-content {
       display: none;
     }
+
+    /* サイドバーボタンのスタイル */
+    #sidebar button {
+      width: 50px;
+      height: 40px;
+      margin: 10px 0;
+      font-size: 12px;
+      border: none; /* 境界線を非表示にする */
+      background-color: white; /* ボタンの背景を白に設定 */
+      border-radius: 5px; /* 角を丸くする */
+      position: relative; /* SVG画像を重ねるために必要 */
+    }
+
+    /* リンクボタンの画像スタイル */
+    #navigate img {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: 5px;
+      left: 10px; /* ボタン内で画像をセンター寄せ */
+      pointer-events: none; /* ボタンの画像がクリックの邪魔をしないように */
+    }
   </style>
 </head>
 <body>
@@ -54,18 +76,24 @@
 
     <!-- Sidebar -->
     <div id="sidebar" style="width: 60px; background-color: gray; padding: 5px; box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); position: fixed; top: 0; left: 0; height: 100%; display: flex; flex-direction: column; align-items: center;">
-      <button id="reset" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">最初から</button>
+      <button id="reset">最初から</button>
       <hr style="width: 80%; border: 1px solid lightgray; margin: 10px 0;">
-      <button id="togglePlay" style="width: 50px; height: 40px; margin: 10px 0; font-size: 12px; border: none; background-color: lightgray;">再生</button>
+      <button id="togglePlay">再生</button>
       <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 20px;">
-        <button id="rewind" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒戻す</button>
-        <button id="forward" style="width: 50px; height: 40px; font-size: 12px; border: none; background-color: lightgray;">10秒進む</button>
+        <button id="rewind">10秒戻す</button>
+        <button id="forward">10秒進む</button>
       </div>
-      <button id="toggleSidebar" style="width: 50px; height: 40px; margin: 20px 0; font-size: 12px; border: none; background-color: lightgray;">切り替え</button>
+      <button id="toggleSidebar">切り替え</button>
+      
+      <!-- 新しいリンクボタン -->
+      <button id="navigate">
+        <img src="1.svg" alt="Link Icon">
+      </button>
     </div>
+
     <!-- Lyrics Display -->
     <div id="lyrics" style="flex-grow: 1; margin-left: 60px; padding: 20px; font-family: Arial, sans-serif; font-size: 18px; line-height: 1.8; color: #333; overflow-y: scroll; height: 100%;">
-    <p>桜のつぼみが開くとき</p>
+          <p>桜のつぼみが開くとき</p>
     <p>僕らの心は揺れ動く</p>
     <p>未来に抱える不安とともに</p>
     <p>1人で歩く帰り道</p>
@@ -134,6 +162,7 @@
     const forwardButton = document.getElementById('forward');
     const resetButton = document.getElementById('reset');
     const toggleSidebarButton = document.getElementById('toggleSidebar');
+    const navigateButton = document.getElementById('navigate');
     const sidebar = document.getElementById('sidebar');
     const lyrics = document.getElementById('lyrics');
 
@@ -171,6 +200,11 @@
         lyrics.style.marginLeft = '60px';
         lyrics.style.marginRight = '0px';
       }
+    });
+
+    // URL遷移の処理
+    navigateButton.addEventListener('click', () => {
+      window.location.href = 'https://example.com'; // 遷移先URLをここに記載
     });
   </script>
 
